@@ -2,6 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+kapt{
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -35,6 +41,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
     compile project(':Provider')
 
