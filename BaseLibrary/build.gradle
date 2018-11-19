@@ -85,6 +85,10 @@ dependencies {
     compile "com.alibaba:arouter-api:$arouter_api_version"
     //BadgeView
     compile 'q.rorbin:badgeview:1.1.2'
+    //RxPermissions
+    compile('com.github.tbruyelle:rxpermissions:0.10.2', {
+        exclude group: 'com.android.support'
+    })
 }
 repositories {
     mavenCentral()

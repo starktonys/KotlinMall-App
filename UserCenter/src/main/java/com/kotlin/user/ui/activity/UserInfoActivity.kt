@@ -1,5 +1,6 @@
 package com.kotlin.user.ui.activity
 
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import com.jph.takephoto.model.TResult
@@ -22,6 +23,9 @@ import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*
 import org.jetbrains.anko.toast
 import org.json.JSONObject
+import android.Manifest.permission.READ_PHONE_STATE
+import com.tbruyelle.rxpermissions2.RxPermissions
+
 
 /*
     用户信息
@@ -54,7 +58,17 @@ class UserInfoActivity : BaseTakePhotoActivity<UserInfoPresenter>(), UserInfoVie
      */
     private fun initView() {
         mUserIconView.onClick {
-            showAlertView()
+            RxPermissions(this)
+                    .request(Manifest.permission.CAMERA,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe({ granted ->
+                        if (granted) {
+                            showAlertView()
+                        } else {
+                            toast("请到设置开启相应权限!")
+                        }
+                    })
         }
 
         mHeaderBar.getRightView().onClick {
