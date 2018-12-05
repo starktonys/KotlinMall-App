@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.FrameLayout
 import com.kotlin.base.R
 import com.kotlin.base.common.AppManager
+import com.kotlin.base.utils.ToolbarHelper
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 import org.jetbrains.anko.find
 
@@ -15,7 +16,7 @@ open class BaseActivity:RxAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        //ToolbarHelper.initTranslucent(this)
         AppManager.instance.addActivity(this)
     }
 

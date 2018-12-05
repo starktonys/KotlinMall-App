@@ -85,6 +85,9 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
             for (item in mAdapter.dataList) {
                 item.isSelected = mAllCheckedCb.isChecked
             }
+
+
+
             mAdapter.notifyDataSetChanged()
             updateTotalPrice()
         }

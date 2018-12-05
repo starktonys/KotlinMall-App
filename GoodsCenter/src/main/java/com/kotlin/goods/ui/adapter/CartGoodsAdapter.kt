@@ -3,6 +3,7 @@ package com.kotlin.goods.ui.adapter
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.kotlin.goods.data.protocol.CartGoods
 import com.kotlin.goods.event.CartAllCheckedEvent
 import com.kotlin.goods.event.UpdateTotalPriceEvent
 import com.kotlin.goods.getEditText
+import com.qiniu.android.utils.StringUtils
 import kotlinx.android.synthetic.main.layout_cart_goods_item.view.*
 
 /*
@@ -60,6 +62,7 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
         //商品数量变化监听
         holder.itemView.mGoodsCountBtn.getEditText().addTextChangedListener(object:DefaultTextWatcher(){
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (StringUtils.isBlank(s.toString())) return
                 model.goodsCount = s.toString().toInt()
                 Bus.send(UpdateTotalPriceEvent())
             }
