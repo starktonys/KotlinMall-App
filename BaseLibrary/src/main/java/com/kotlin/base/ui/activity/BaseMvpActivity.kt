@@ -16,7 +16,7 @@ import javax.inject.Inject
 /*
     Activity基类，业务相关
  */
-abstract open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
     //Presenter泛型，Dagger注入
     @Inject
