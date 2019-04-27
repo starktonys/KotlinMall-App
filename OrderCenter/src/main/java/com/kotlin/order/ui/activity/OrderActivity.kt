@@ -26,7 +26,7 @@ class OrderActivity:BaseActivity() {
      */
     private fun initView() {
         mOrderTab.tabMode = TabLayout.MODE_FIXED
-        mOrderVp.adapter = OrderVpAdapter(supportFragmentManager,this)
+        mOrderVp.adapter = OrderVpAdapter(supportFragmentManager)
         mOrderTab.setupWithViewPager(mOrderVp)
 
         //根据订单状态设置当前页面

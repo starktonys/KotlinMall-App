@@ -1,6 +1,5 @@
 package com.kotlin.goods.ui.adapter
 
-import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -10,7 +9,7 @@ import com.kotlin.goods.ui.fragment.GoodsDetailTabTwoFragment
 /*
     商品详情ViewPager Adapter
  */
-class GoodsDetailVpAdapter(fm:FragmentManager,context:Context)
+class GoodsDetailVpAdapter(fm: FragmentManager)
     :FragmentPagerAdapter(fm) {
 
     private val titles = arrayOf("商品","详情")

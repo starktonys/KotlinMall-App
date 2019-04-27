@@ -104,7 +104,7 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
         取消订单对话框
      */
     private fun showCancelDialog(order:Order) {
-        AlertView("取消订单", "确定取消该订单？", "取消", null, arrayOf("确定"), activity, AlertView.Style.Alert, OnItemClickListener { o, position ->
+        AlertView("取消订单", "确定取消该订单？", "取消", null, arrayOf("确定"), activity, AlertView.Style.Alert, OnItemClickListener { _, position ->
             if (position == 0){
                 mPresenter.cancelOrder(order.id)
             }
