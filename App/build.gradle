@@ -46,6 +46,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
+
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {

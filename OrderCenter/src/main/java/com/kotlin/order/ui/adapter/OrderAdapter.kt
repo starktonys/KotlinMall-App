@@ -43,7 +43,7 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
         val model = dataList[position]
 
         var mTotalCount = 0
-        if (model.orderGoodsList.size == 1){//单个商品
+        if (model.orderGoodsList.size == 1) {//单个商品
             holder.itemView.mSingleGoodsView.setVisible(true)
             holder.itemView.mMultiGoodsView.setVisible(false)//单个商品隐藏多个商品视图
             val orderGoods = model.orderGoodsList[0]
@@ -53,13 +53,13 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
             holder.itemView.mGoodsCountTv.text = "x${orderGoods.goodsCount}"//商品数量
             mTotalCount = orderGoods.goodsCount
 
-        }else{//多个商品视图展示
+        } else {//多个商品视图展示
             holder.itemView.mSingleGoodsView.setVisible(false)//多个商品隐藏单个商品视图
             holder.itemView.mMultiGoodsView.setVisible(true)
             holder.itemView.mMultiGoodsView.removeAllViews()
-            for (orderGoods in model.orderGoodsList){//动态添加商品视图
+            for (orderGoods in model.orderGoodsList) {//动态添加商品视图
                 val imageView = ImageView(mContext)
-                val lp = ViewGroup.MarginLayoutParams(mContext.dip(60.0f),mContext.dip(60.0f))
+                val lp = ViewGroup.MarginLayoutParams(mContext.dip(60.0f), mContext.dip(60.0f))
                 lp.rightMargin = mContext.dip(15f)
                 imageView.layoutParams = lp
                 imageView.loadUrl(orderGoods.goodsIcon)
@@ -73,49 +73,49 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
         holder.itemView.mOrderInfoTv.text = "合计${mTotalCount}件商品，总价${YuanFenConverter.changeF2YWithUnit(model.totalPrice)}"
 
 
-        when(model.orderStatus){//根据订单状态设置颜色、文案及对应操作按钮
+        when (model.orderStatus) {//根据订单状态设置颜色、文案及对应操作按钮
             OrderStatus.ORDER_WAIT_PAY -> {
                 holder.itemView.mOrderStatusNameTv.text = "待支付"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_red))
-                setOptVisible(false,true,true,holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_red))
+                setOptVisible(false, true, true, holder)
             }
             OrderStatus.ORDER_WAIT_CONFIRM -> {
                 holder.itemView.mOrderStatusNameTv.text = "待收货"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_blue))
-                setOptVisible(true,false,true,holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_blue))
+                setOptVisible(true, false, true, holder)
             }
 
             OrderStatus.ORDER_COMPLETED -> {
                 holder.itemView.mOrderStatusNameTv.text = "已完成"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_yellow))
-                setOptVisible(false,false,false,holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_yellow))
+                setOptVisible(false, false, false, holder)
             }
 
             OrderStatus.ORDER_CANCELED -> {
                 holder.itemView.mOrderStatusNameTv.text = "已取消"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_gray))
-                setOptVisible(false,false,false,holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_gray))
+                setOptVisible(false, false, false, holder)
             }
         }
 
         //设置确认收货点击事件
         holder.itemView.mConfirmBtn.onClick {
             listener?.let {
-                it.onOptClick(OrderConstant.OPT_ORDER_CONFIRM,model)
+                it.onOptClick(OrderConstant.OPT_ORDER_CONFIRM, model)
             }
         }
 
         //设置支付订单点击事件
         holder.itemView.mPayBtn.onClick {
             listener?.let {
-                it.onOptClick(OrderConstant.OPT_ORDER_PAY,model)
+                it.onOptClick(OrderConstant.OPT_ORDER_PAY, model)
             }
         }
 
         //设置取消订单点击事件
         holder.itemView.mCancelBtn.onClick {
             listener?.let {
-                it.onOptClick(OrderConstant.OPT_ORDER_CANCEL,model)
+                it.onOptClick(OrderConstant.OPT_ORDER_CANCEL, model)
             }
         }
 
@@ -126,14 +126,14 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
     /*
         设置操作按钮显示或隐藏
      */
-    private fun setOptVisible(confirmVisible: Boolean, waitPayVisible: Boolean, cancelVisible: Boolean,holder: ViewHolder) {
+    private fun setOptVisible(confirmVisible: Boolean, waitPayVisible: Boolean, cancelVisible: Boolean, holder: ViewHolder) {
         holder.itemView.mConfirmBtn.setVisible(confirmVisible)
         holder.itemView.mPayBtn.setVisible(waitPayVisible)
         holder.itemView.mCancelBtn.setVisible(cancelVisible)
 
-        if (confirmVisible or waitPayVisible or cancelVisible){
+        if (confirmVisible or waitPayVisible or cancelVisible) {
             holder.itemView.mBottomView.setVisible(true)
-        }else{
+        } else {
             holder.itemView.mBottomView.setVisible(false)
         }
 
@@ -142,7 +142,7 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     interface OnOptClickListener {
-        fun onOptClick(optType:Int,order:Order)
+        fun onOptClick(optType: Int, order: Order)
     }
 
 }
