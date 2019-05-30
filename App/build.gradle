@@ -10,7 +10,7 @@ kapt{
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion compile_sdk_version
     defaultConfig {
         applicationId "com.kotlin.mall"
         minSdkVersion 15
