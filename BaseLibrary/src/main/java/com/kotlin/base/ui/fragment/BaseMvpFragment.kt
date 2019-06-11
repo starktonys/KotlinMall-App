@@ -11,31 +11,28 @@ import com.kotlin.base.injection.module.ActivityModule
 import com.kotlin.base.injection.module.LifecycleProviderModule
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.presenter.view.BaseView
-import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.widgets.ProgressLoading
-import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /*
     Fragment基类，业务相关
  */
-abstract open class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
+abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
 
     lateinit var mActivityComponent: ActivityComponent
 
-    private lateinit var mLoadingDialog:ProgressLoading
+    private lateinit var mLoadingDialog: ProgressLoading
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initActivityInjection()
         injectComponent()
 
         //初始加载框
-        mLoadingDialog = ProgressLoading.create(context)
+        mLoadingDialog = ProgressLoading.create(this!!.context!!)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -48,8 +45,8 @@ abstract open class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
         初始化Activity级别Component
      */
     private fun initActivityInjection() {
-        mActivityComponent = DaggerActivityComponent.builder().appComponent((activity.application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(activity))
+        mActivityComponent = DaggerActivityComponent.builder().appComponent((activity?.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(this!!.activity!!))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
 
@@ -72,7 +69,7 @@ abstract open class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
     /*
         错误信息提示，默认实现
      */
-    override fun onError(text:String) {
+    override fun onError(text: String) {
         toast(text)
     }
 }
