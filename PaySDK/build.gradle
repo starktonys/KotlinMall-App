@@ -3,9 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
-kapt{
+kapt {
     arguments {
-        arg("moduleName", project.getName())
+        arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
 
@@ -30,6 +30,11 @@ android {
         main() {
             jniLibs.srcDirs = ['libs']
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 
 }
