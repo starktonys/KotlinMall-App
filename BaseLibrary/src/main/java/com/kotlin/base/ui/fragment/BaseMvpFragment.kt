@@ -32,7 +32,7 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
         injectComponent()
 
         //初始加载框
-        mLoadingDialog = ProgressLoading.create(context)
+        mLoadingDialog = ProgressLoading.create(this!!.context!!)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -69,7 +69,7 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
     /*
         错误信息提示，默认实现
      */
-    override fun onError(text:String) {
+    override fun onError(text: String) {
         toast(text)
     }
 }
