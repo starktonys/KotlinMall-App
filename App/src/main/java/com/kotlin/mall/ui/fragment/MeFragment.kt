@@ -32,7 +32,7 @@ class MeFragment : BaseFragment(), View.OnClickListener {
         return inflater.inflate(R.layout.fragment_me, null)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()

@@ -48,13 +48,13 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         mPresenter.mView = this
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater?.inflate(R.layout.fragment_cart, container, false)
     }
 
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initObserve()
@@ -73,7 +73,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
      */
     private fun initView() {
         mCartGoodsRv.layoutManager = LinearLayoutManager(context)
-        mAdapter = CartGoodsAdapter(context)
+        mAdapter = context?.let { CartGoodsAdapter(it) }!!
         mCartGoodsRv.adapter = mAdapter
 
         mHeaderBar.getRightView().onClick {

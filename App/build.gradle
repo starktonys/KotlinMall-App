@@ -53,13 +53,22 @@ dependencies {
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     implementation project(':Provider')
-    if (isUserModule.toBoolean()) {
+    if (!isUserModuleRunAlone.toBoolean()) {
         implementation project(':UserCenter')
     }
-    implementation project(':MessageCenter')
-    implementation project(':GoodsCenter')
-    implementation project(':OrderCenter')
-    implementation project(':PaySDK')
+    if (!isPaySdkRunAlone.toBoolean()) {
+        implementation project(':PaySDK')
+    }
+    if (!isOrderCenterRunAlone.toBoolean()) {
+        implementation project(':OrderCenter')
+    }
+    if (!isMessageCenterRunAlone.toBoolean()) {
+        api project(':MessageCenter')
+    }
+    if (!isGoodsCenterRunAlone.toBoolean()) {
+        implementation project(':GoodsCenter')
+    }
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

@@ -25,14 +25,14 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
 
     lateinit var mActivityComponent: ActivityComponent
 
-    private lateinit var mLoadingDialog: ProgressLoading
+    private lateinit var mLoadingDialog:ProgressLoading
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initActivityInjection()
         injectComponent()
 
         //初始加载框
-        mLoadingDialog = ProgressLoading.create(this!!.context!!)
+        mLoadingDialog = ProgressLoading.create(context)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -46,7 +46,7 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
      */
     private fun initActivityInjection() {
         mActivityComponent = DaggerActivityComponent.builder().appComponent((activity?.application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(this!!.activity!!))
+                .activityModule(ActivityModule(activity!!))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
 
@@ -69,7 +69,7 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
     /*
         错误信息提示，默认实现
      */
-    override fun onError(text: String) {
+    override fun onError(text:String) {
         toast(text)
     }
 }

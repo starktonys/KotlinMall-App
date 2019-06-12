@@ -26,12 +26,12 @@ class MessageFragment:BaseMvpFragment<MessagePresenter>(),MessageView {
 
     private lateinit var mAdapter:MessageAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater?.inflate(R.layout.fragment_message,container,false)
+        return inflater.inflate(R.layout.fragment_message,container,false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
 
@@ -42,7 +42,7 @@ class MessageFragment:BaseMvpFragment<MessagePresenter>(),MessageView {
      */
     private fun initView() {
         mMessageRv.layoutManager = LinearLayoutManager(context)
-        mAdapter = MessageAdapter(context)
+        mAdapter = context?.let { MessageAdapter(it) }!!
         mMessageRv.adapter = mAdapter
     }
 

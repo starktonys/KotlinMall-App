@@ -3,8 +3,8 @@ package com.kotlin.message.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import cn.jpush.android.api.JPushInterface
 import android.util.Log
+import cn.jpush.android.api.JPushInterface
 import com.alibaba.android.arouter.launcher.ARouter
 import com.eightbitlab.rxbus.Bus
 import com.kotlin.provider.common.ProviderConstant
