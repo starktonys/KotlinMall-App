@@ -1,4 +1,9 @@
-apply plugin: 'com.android.library'
+if (isMessageCenterRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -42,6 +47,16 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            if (isPaySdkRunAlone.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -56,9 +71,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
-    implementation 'cn.jiguang.sdk:jpush:3.0.9'
+    api 'cn.jiguang.sdk:jpush:3.0.9'
     // 此处以JPush 3.0.9 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.1.7'
+    api 'cn.jiguang.sdk:jcore:1.1.7'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // 此处以JCore 1.1.7 版本为例。
 }

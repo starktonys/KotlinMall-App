@@ -2,12 +2,11 @@ package com.kotlin.goods.widget
 
 import android.app.Activity
 import android.content.Context
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams
-import android.widget.*
+import android.widget.PopupWindow
 import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.ext.loadUrl
 import com.kotlin.base.ext.onClick
@@ -50,7 +49,7 @@ class GoodsSkuPopView(context: Activity) : PopupWindow(context), View.OnClickLis
         background.alpha = 150
         // mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
         mRootView.setOnTouchListener { _, event ->
-            val height = mRootView.findViewById(R.id.mPopView).top
+            val height = mRootView.findViewById<View>(R.id.mPopView).top
             val y = event.y.toInt()
             if (event.action == MotionEvent.ACTION_UP) {
                 if (y < height) {

@@ -30,9 +30,9 @@ import org.jetbrains.anko.support.v4.toast
 /*
     订单列表Fragment
  */
-class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
+class OrderFragment : BaseMvpFragment<OrderListPresenter>(), OrderListView {
 
-    private lateinit var mAdapter:OrderAdapter
+    private lateinit var mAdapter: OrderAdapter
 
     /*
         Dagger注册
@@ -42,13 +42,13 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
         mPresenter.mView = this
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        return inflater?.inflate(R.layout.fragment_order,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater!!, container, savedInstanceState)
+        return inflater?.inflate(R.layout.fragment_order, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view!!, savedInstanceState)
         initView()
     }
 
@@ -62,23 +62,23 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
      */
     private fun initView() {
         mOrderRv.layoutManager = LinearLayoutManager(activity)
-        mAdapter = OrderAdapter(activity)
+        mAdapter = activity?.let { OrderAdapter(it) }!!
         mOrderRv.adapter = mAdapter
 
         /*
             订单对应操作
          */
-        mAdapter.listener = object :OrderAdapter.OnOptClickListener {
+        mAdapter.listener = object : OrderAdapter.OnOptClickListener {
             override fun onOptClick(optType: Int, order: Order) {
-                when(optType){
+                when (optType) {
                     OrderConstant.OPT_ORDER_PAY -> {
                         ARouter.getInstance().build(RouterPath.PaySDK.PATH_PAY)
-                                .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
-                                .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
+                                .withInt(ProviderConstant.KEY_ORDER_ID, order.id)
+                                .withLong(ProviderConstant.KEY_ORDER_PRICE, order.totalPrice)
                                 .navigation()
                     }
                     OrderConstant.OPT_ORDER_CONFIRM -> {
-                       mPresenter.confirmOrder(order.id)
+                        mPresenter.confirmOrder(order.id)
                     }
                     OrderConstant.OPT_ORDER_CANCEL -> {
                         //mPresenter.cancelOrder(order.id)
@@ -103,9 +103,9 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
     /*
         取消订单对话框
      */
-    private fun showCancelDialog(order:Order) {
+    private fun showCancelDialog(order: Order) {
         AlertView("取消订单", "确定取消该订单？", "取消", null, arrayOf("确定"), activity, AlertView.Style.Alert, OnItemClickListener { o, position ->
-            if (position == 0){
+            if (position == 0) {
                 mPresenter.cancelOrder(order.id)
             }
         }
@@ -118,17 +118,17 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
      */
     private fun loadData() {
         mMultiStateView.startLoading()
-        mPresenter.getOrderList(arguments.getInt(OrderConstant.KEY_ORDER_STATUS,-1))
+        mPresenter.getOrderList(arguments?.getInt(OrderConstant.KEY_ORDER_STATUS, -1)!!)
     }
 
     /*
         获取订单列表回调
      */
     override fun onGetOrderListResult(result: MutableList<Order>?) {
-        if (result != null && result.size > 0){
+        if (result != null && result.size > 0) {
             mAdapter.setData(result)
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
-        }else{
+        } else {
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
     }
