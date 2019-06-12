@@ -30,6 +30,6 @@ class OrderActivity : BaseActivity() {
         mOrderTab.setupWithViewPager(mOrderVp)
 
         //根据订单状态设置当前页面
-        mOrderVp.currentItem = intent.getIntExtra(OrderConstant.KEY_ORDER_STATUS,OrderStatus.ORDER_ALL)
+        mOrderVp.currentItem = intent.getIntExtra(OrderConstant.KEY_ORDER_STATUS, OrderStatus.ORDER_ALL)
     }
 }
