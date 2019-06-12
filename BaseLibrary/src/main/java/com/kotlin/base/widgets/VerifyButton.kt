@@ -2,6 +2,7 @@ package com.kotlin.base.widgets
 
 import android.content.Context
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.widget.Button
 import com.kotlin.base.R
@@ -38,8 +39,8 @@ class VerifyButton(mContext: Context, attrs: AttributeSet) : Button(mContext, at
     private val countDown = object : Runnable {
         override fun run() {
             this@VerifyButton.text = mCount.toString() + "s "
-            this@VerifyButton.setBackgroundColor(resources.getColor(R.color.common_disable))
-            this@VerifyButton.setTextColor(resources.getColor(R.color.common_white))
+            this@VerifyButton.setBackgroundColor(ContextCompat.getColor(context,R.color.common_disable))
+            this@VerifyButton.setTextColor(ContextCompat.getColor(context,R.color.common_white))
             this@VerifyButton.isEnabled = false
 
             if (mCount > 0) {
@@ -65,8 +66,8 @@ class VerifyButton(mContext: Context, attrs: AttributeSet) : Button(mContext, at
         } else {
             this.text = "重获验证码"
         }
-        this.setBackgroundColor(resources.getColor(R.color.transparent))
-        this.setTextColor(resources.getColor(R.color.common_blue))
+        this.setBackgroundColor(ContextCompat.getColor(context,R.color.transparent))
+        this.setTextColor(ContextCompat.getColor(context,R.color.common_blue))
         mCount = 60
     }
 
