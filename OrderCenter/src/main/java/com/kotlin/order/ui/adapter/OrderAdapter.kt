@@ -1,6 +1,7 @@
 package com.kotlin.order.ui.adapter
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -75,24 +76,24 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
         when(model.orderStatus){//根据订单状态设置颜色、文案及对应操作按钮
             OrderStatus.ORDER_WAIT_PAY -> {
                 holder.itemView.mOrderStatusNameTv.text = "待支付"
-                holder.itemView.mOrderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_red))
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_red))
                 setOptVisible(false,true,true,holder)
             }
             OrderStatus.ORDER_WAIT_CONFIRM -> {
                 holder.itemView.mOrderStatusNameTv.text = "待收货"
-                holder.itemView.mOrderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_blue))
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_blue))
                 setOptVisible(true,false,true,holder)
             }
 
             OrderStatus.ORDER_COMPLETED -> {
                 holder.itemView.mOrderStatusNameTv.text = "已完成"
-                holder.itemView.mOrderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_yellow))
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_yellow))
                 setOptVisible(false,false,false,holder)
             }
 
             OrderStatus.ORDER_CANCELED -> {
                 holder.itemView.mOrderStatusNameTv.text = "已取消"
-                holder.itemView.mOrderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_gray))
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_gray))
                 setOptVisible(false,false,false,holder)
             }
         }

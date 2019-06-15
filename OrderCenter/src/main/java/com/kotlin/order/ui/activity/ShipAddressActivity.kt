@@ -70,7 +70,7 @@ class ShipAddressActivity:BaseMvpActivity<ShipAddressPresenter>(),ShipAddressVie
             }
 
             override fun onDelete(address: ShipAddress) {
-                AlertView("删除", "确定删除该地址？", "取消", null, arrayOf("确定"), this@ShipAddressActivity, AlertView.Style.Alert, OnItemClickListener { o, position ->
+                AlertView("删除", "确定删除该地址？", "取消", null, arrayOf("确定"), this@ShipAddressActivity, AlertView.Style.Alert, OnItemClickListener { _, position ->
                   if (position == 0){
                       mPresenter.deleteShipAddress(address.id)
                   }
