@@ -76,25 +76,25 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
         when (model.orderStatus) {//根据订单状态设置颜色、文案及对应操作按钮
             OrderStatus.ORDER_WAIT_PAY -> {
                 holder.itemView.mOrderStatusNameTv.text = "待支付"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_red))
-                setOptVisible(false, true, true, holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_red))
+                setOptVisible(false,true,true,holder)
             }
             OrderStatus.ORDER_WAIT_CONFIRM -> {
                 holder.itemView.mOrderStatusNameTv.text = "待收货"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_blue))
-                setOptVisible(true, false, true, holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_blue))
+                setOptVisible(true,false,true,holder)
             }
 
             OrderStatus.ORDER_COMPLETED -> {
                 holder.itemView.mOrderStatusNameTv.text = "已完成"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_yellow))
-                setOptVisible(false, false, false, holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_yellow))
+                setOptVisible(false,false,false,holder)
             }
 
             OrderStatus.ORDER_CANCELED -> {
                 holder.itemView.mOrderStatusNameTv.text = "已取消"
-                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.common_gray))
-                setOptVisible(false, false, false, holder)
+                holder.itemView.mOrderStatusNameTv.setTextColor(ContextCompat.getColor(mContext,R.color.common_gray))
+                setOptVisible(false,false,false,holder)
             }
         }
 
