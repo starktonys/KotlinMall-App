@@ -58,17 +58,20 @@ class UserInfoActivity : BaseTakePhotoActivity<UserInfoPresenter>(), UserInfoVie
      */
     private fun initView() {
         mUserIconView.onClick {
-            RxPermissions(this)
-                    .request(Manifest.permission.CAMERA,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe({ granted ->
-                        if (granted) {
-                            showAlertView()
-                        } else {
-                            toast("请到设置开启相应权限!")
-                        }
-                    })
+//            RxPermissions(this)
+//                    .requestEach(Manifest.permission.CAMERA,
+//                            Manifest.permission.READ_EXTERNAL_STORAGE,
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    .subscribe({ granted ->
+//                        if (granted) {
+//                            showAlertView()
+//                        } else {
+//                            toast("请到设置开启相应权限!")
+//                        }
+//                    })
+//            val rxPermissions = RxPermissions(this)
+//                    rxPermissions.request(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            //io.reactivex.Observable'
         }
 
         mHeaderBar.getRightView().onClick {
